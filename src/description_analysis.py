@@ -106,7 +106,6 @@ class Description_Analysis:
     #note this is NOT lemmatizing using grammar pos
     def tokenize(self, text, modulation=1):
 
-        # TODO: Adapt to Stemmer
         porter = PorterStemmer()
 
         if modulation<2:
@@ -122,7 +121,7 @@ class Description_Analysis:
                         if modulation==1:
                             stems.append(porter.stem(lowers))
         else:
-            sp_text=sp(text)
+            sp_text=self.sp(text)
             stems = []
             lemmatized_text=[]
             for word in sp_text:
@@ -141,10 +140,8 @@ class Description_Analysis:
         # Step 0: No, nan, and empty string removal
         df = df[df['Hotel_Description_Long'].notna()]
 
-        # Step 1: Apply CountVectorizer
+        # Step 1: Apply Vectorizer
         if TFidf:
-            # Apply TfidfVectorizer with limit 
-
             vectorizer = TfidfVectorizer(max_features=5000, ngram_range = (n_gram_min,n_gram_max), min_df=0.0, max_df=0.95)
         else:
             vectorizer = CountVectorizer(max_features=5000, ngram_range = (n_gram_min,n_gram_max), min_df=0.0, max_df=0.95)
@@ -261,7 +258,7 @@ class Description_Analysis:
         df1 = df1[df1['Hotel_Description_Long'].notna()]
         df2 = df2[df2['Hotel_Description_Long'].notna()]
 
-        vectorizer = CountVectorizer(ngram_range=(1,2), min_df=0.0, max_df=0.95)
+        vectorizer = CountVectorizer(max_features=5000,ngram_range=(1,2), min_df=0.0, max_df=0.95)
         matrix1 = vectorizer.fit_transform(df1['Hotel_Description_Long'])
         matrix2 = vectorizer.transform(df2['Hotel_Description_Long'])
 
