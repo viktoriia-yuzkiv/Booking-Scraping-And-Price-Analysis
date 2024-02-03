@@ -74,12 +74,7 @@ class Booking_Scrapper:
         it. If not, waits one second and tries again. After 3 seconds of waiting, it doesn't try anymore.
         '''
         start_time = time.time()  # Record the start time
-        if path == '/html/body/div[3]/div[2]/div/form/div[1]/div[4]/button/span':
-            print('Search Button')
-        
-        if path == '/html/body/div[4]/div/div[2]/div/div[1]/div/form/div[1]/div[4]/button/span':
-            print('Search Button _ 2')
-            
+
         while True:
             try:
                 if type == "xpath":
