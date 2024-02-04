@@ -155,7 +155,7 @@ class Description_Analysis:
 
         # Step 3: Identify common words
         common_words = list(set(vectorizer.get_feature_names_out()))
-        print(f"Number of common words: {len(common_words)}")
+        print(f"Number of words (max_features=5000): {len(common_words)}")
 
         # Initialize variables to store the top 3 words and coefficients
         top_words_coefficients = []
